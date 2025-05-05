@@ -1,0 +1,72 @@
+Python-Project-TCP Chat Room
+
+INTRODUCTION
+
+Python is a great programming language for computer networking. It allows us to create solid applications very fast and easily. we are going to implement a fully-functioning TCP chat. We will have one server that hosts the chat and multiple clients that connect to it and communicate with each other. At the end, you can also add custom features like chat rooms, commands, roles etc., if you want to.
+
+REQUIREMENT
+
+what type of architecture is required for it?
+Client-server-Architecture is needed to create a chat room.
+To have multiple clients at the same time.
+clients will connect themselves using server.
+we will write two python scripts-(a)For the server
+                                 (b) for the client
+SERVER IMPLEMENTATION
+import socket- socket programming is a way of connecting two nodes on a network to communicate with each other. One socket(node) listens on a particular port at an IP ,while the other socket reaches out to the other to form a connection.
+They are the real backbones behind web browsing.
+
+import threading-
+thread refers to a thread of execution in a computer program.
+The operating system object that executes the instruction of a process.
+(The ideas is that backgrounds are like “daemons” or spirits (from the ancient Greek) that do tasks for you in the background. You might also refer to daemon threads as daemonic)
+
+TO DEFINE CONNECTION AND TO INITIALIZE THE SOCKET-
+1.will need an IP-address for the host and free port number for our server.
+connection Data- host, port
+starting server-
+lists for clients and their Nicknames
+
+while defining socket, we need to pass two parameters. These define the type of socket we want to use.
+1.AF_INET- This indicates that we are using an internet socket rather than an UNIX socket.
+2.SOCK_STREAM- Indicates that we are using TCP and not UDP.
+these are the two parameters we have defined.
+
+Then we will create two empty lists- to store the connected clients and their nicknames later on.
+clients = []
+nicknames =[]
+
+then we will define an function to broadcast our message for clients to broadcast their message with the help of the server to communicate with others.
+to make code for readable.
+
+ def broadcast(message):
+  for clients in clients:
+   client. Send(message)
+
+here we a defined a little function that is going to help us broadcasting messages and makes the code more readable .what it does just sending a message to each client that is connected and therefore in the clients list. we will use this method in the other methods.
+
+From here implementation has been started: I will not share the exact code here itself in the notepad but what to do in steps I will explain it here
+ def handle(client)  for handling messages from clients
+we have to use while loop. it will not stop unless there is a exception.
+
+What it then does is receiving the message from the client (if he sends any) and broadcasting it to all connected clients. So when one client sends a message, everyone else can see this message. Now if for some reason there is an error with the connection to this client, we remove it and its nickname, close the connection and broadcast that this client has left the chat. After that we break the loop and this thread comes to an end. Quite simple. We are almost done with the server but we need one final function.
+
+When we are ready to run our server, we will execute this receive function. It also starts an endless while-loop which constantly accepts new connections from clients. Once a client is connected it sends the string ‘NICK’ to it, which will tell the client that its nickname is requested. After that it waits for a response (which hopefully contains the nickname) and appends the client with the respective nickname to the lists. After that, we print and broadcast this information. Finally, we start a new thread that runs the previously implemented handling function for this particular client. Now we can just run this function and our server is done.
+
+Notice that we are always encoding and decoding the messages here. The reason for this is that we can only send bytes and not strings. So we always need to encode messages (for example using ASCII), when we send them and decode them, when we receive them.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
